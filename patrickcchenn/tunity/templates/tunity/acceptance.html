@@ -1,0 +1,50 @@
+{% extends "tunity/layout.html" %} {% load static %} {% block body %}
+<h3>Acceptance</h3>
+
+
+<div class="row">
+  {%for application in list%}
+  
+  <div class="col-md-6 col-sm-12">
+    <div class="border text-center">
+      <b>Applicant:{{application.0}}</b>
+      <br />
+      {{application.0.email}}
+      <br />
+      {{application.1.position}} <br />
+      {% if application.2 is not None %} {%if application.2 is True%}
+      <b>Accepted!</b>
+      {%else%}
+      <b>Declined</b>
+      {%endif%} {%else%}
+      <button
+        type="button"
+        id="accept_{{application.0}}-{{application.1.id}}"
+        data-user="{{application.0}}"
+        data-vacancy="{{application.1.id}}"
+        class="btn btn-info accept_button"
+      >
+        Accept
+      </button>
+      <button
+        type="button"
+        id="decline_{{application.0}}-{{application.1.id}}"
+        data-user="{{application.0}}"
+        data-vacancy="{{application.1.id}}"
+        class="btn btn-warning decline_button"
+      >
+        Decline
+      </button>
+      <b id='message'> </b>
+      {% endif %}
+      <br>
+      <a href="{{application.0.CV.file_field.url}}"   class="btn btn-dark" target="_blank" >View resume</a>
+
+    </div>
+  </div>
+  {%endfor%}
+</div>
+
+{%endblock%} {% block script %}
+<script src="{% static 'tunity/tunity.js' %}"></script>
+{% endblock %}

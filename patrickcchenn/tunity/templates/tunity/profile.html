@@ -1,0 +1,43 @@
+{% extends "tunity/layout.html" %} {% load static %} {% block body %}
+
+<div class="profile">
+  <h3>{{owner.username}}</h3>
+  <hr />
+  {%if owner.is_company%}
+  <div class="row">
+    <div class="col-md-3 col-sm-12"></div>
+    <div class="col-md-6 col-sm-12">
+      <p>
+        {{owner.is_company.body}}
+      </p>
+      <h5>{{owner.email}}</h5>
+    </div>
+    <div class="col-md-3 col-sm-12"></div>
+  </div>
+  <br />
+  <h3>Job Vacancy List</h3>
+  <hr />
+
+  <div class="row">
+  {%for job in owner.vacancies.all%}
+  <div class="col-md-6 col-sm-12">
+    <div class="border text-center">
+      <a href="{% url 'job_view' job.user job.id %}">
+        <b>{{job.position}}</b>
+      </a>
+      <br />
+      {{job.user}}
+      <br />
+      {{job.user.is_company.country}}
+      <br />
+      {{job.description}}
+      <br />
+    </div>
+  </div>
+  {%endfor%}
+  </div>
+  
+    
+  {%endif%}
+</div>
+{% endblock %}

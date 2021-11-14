@@ -1,0 +1,50 @@
+{% extends "tunity/layout.html" %} {% load static %} {% block body %}
+<s></s>
+{% if message %}
+<div>{{ message }}</div>
+{% endif %}
+<form action="{% url 'personal' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-group">
+    <input
+      class="form-control"
+      autofocus
+      type="text"
+      name="username"
+      placeholder="Username"
+      required
+      autocomplete="off"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="email"
+      name="email"
+      placeholder="Email Address"
+      required
+      autocomplete="off"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="password"
+      name="password"
+      placeholder="Password"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="password"
+      name="confirmation"
+      placeholder="Confirm Password"
+      required
+    />
+  </div>
+  <input class="btn btn-primary" type="submit" value="Register" />
+  {{form.as_p}}
+</form>
+{%endblock%} {% block script %} {% endblock %}

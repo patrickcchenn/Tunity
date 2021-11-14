@@ -1,0 +1,71 @@
+{% extends "tunity/layout.html" %} {% load static %} {% block body %}
+
+<div class="center" style="text-align: center">
+  Choose account type
+  <br />
+  <div class="form-check form-check-inline">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="flexRadioDefault"
+      id="flexRadioDefault1"
+      value="personal"
+    />
+    <label class="form-check-label" for="flexRadioDefault1"> Personal </label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="flexRadioDefault"
+      id="flexRadioDefault2"
+      value="startup"
+    />
+    <label class="form-check-label" for="flexRadioDefault2"> Startup </label>
+  </div>
+  <br />
+  <button type="button" id="btnn" class="btn btn-info bb">Next</button>
+</div>
+
+{%endblock%} {% block script %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('#btnn').disabled = true;
+
+    const btn1 = document.getElementById('flexRadioDefault1');
+    const btn2 = document.getElementById('flexRadioDefault2');
+    const sbmtBtn = document.getElementById('btnn');
+
+    btn1.addEventListener('click', function () {
+      document.getElementById('btnn').disabled = false;
+    });
+
+    btn2.addEventListener('click', function () {
+      document.getElementById('btnn').disabled = false;
+    });
+
+    btnn.addEventListener('click', () => {
+      var checkRadio = document.querySelector(
+        'input[name="flexRadioDefault"]:checked'
+      );
+
+      if (checkRadio != null) {
+          {% comment %} // similar behavior as an HTTP redirect
+          window.location.replace("http://stackoverflow.com");
+
+          // similar behavior as clicking on a link
+          window.location.href = "http://stackoverflow.com"; {% endcomment %}
+
+        if (checkRadio.value == 'personal') {
+          window.location.href ="{% url 'personal'%}";
+        } else {
+          window.location.href ="{% url 'startup'%}";
+        }
+      } else {
+        console.log(Response.error);
+      }
+    });
+  });
+</script>
+
+{%endblock%}

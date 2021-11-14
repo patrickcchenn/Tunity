@@ -1,0 +1,33 @@
+{% extends "tunity/layout.html" %} {% load static %} {% block body %}
+<h3>Applied</h3>
+
+{%if not list%}
+<p>Nothing's here. Start applying for jobs!!</p>
+{% else %}
+<div class="row">
+  {%for job in list%}
+  <div class="col-md-6 col-sm-12">
+    <div class="border text-center">
+      <a href="{% url 'job_view' job.0.user job.0.id %}">
+        <b>{{job.0.position}}</b>
+      </a>
+      <br />
+      {{job.0.user}}
+      <br />
+      {{job.0.user.is_company.country}}
+      <br />
+      {{job.0.description}}
+      <br />
+      {% if job.1 is not None %} {%if job.1 is True%}
+      <b>Accepted!</b>
+      {%else%}
+      <b>Declined</b>
+      {%endif%} {% else %}
+      <b>TBD</b>
+      {% endif %}
+    </div>
+  </div>
+  {%endfor%} {% endif %} {%endblock%} {% block script %}
+  
+  {% endblock %}
+</div>

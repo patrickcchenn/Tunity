@@ -1,0 +1,43 @@
+{% extends "tunity/layout.html" %} {% load static %} {% block body %}
+<h3>All Post</h3>
+
+<div class="row">
+  {%for job in all%}
+  <div class="col-md-6 col-sm-12">
+    <div class="border text-center">
+      <a href="{% url 'job_view' job.user job.id %}">
+        <b>{{job.position}}</b>
+      </a>
+      <br />
+      {{job.user}}
+      <br />
+      {{job.user.is_company.country}}
+      <br />
+      {{job.description}}
+      <br />
+    </div>
+  </div>
+  {%endfor%}
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if all.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ all.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ all.number }} of {{ all.paginator.num_pages }}.
+        </span>
+
+        {% if all.has_next %}
+            <a href="?page={{ all.next_page_number }}">next</a>
+            <a href="?page={{ all.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+{%endblock%} {% block script %} {% endblock %}

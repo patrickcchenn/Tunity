@@ -1,0 +1,55 @@
+{% extends "tunity/layout.html" %} {% load static %} {% block body %} {% load humanize %}
+
+<h3>{{job.position}}</h3>
+<br />
+{{company.user}} {{company.user.email}}
+<hr />
+
+{{job.description}}
+<br />
+<br />
+<p>
+  Work Hour: {{job.starting_hour}} - {{job.ending_hour}}
+  <br />
+  Work Day: {{job.starting_day}} - {{job.ending_day}}
+  <br />
+  Salary:${{job.salary | intcomma}}
+  <br />
+  <br />
+  <small>{{job.timestamp}}</small>
+
+  <br />
+  {%if user.is_authenticated%} {%if not user.is_company%} {%if user.id in applied%} 
+  <p></p>
+  <button type="button" class="btn btn-info apply_button" disabled>
+    Applied
+  </button>
+  {%else%}
+  <button type="button" class="btn btn-info apply_button">Apply</button>
+  {%endif%} {%endif%} {% endif %}
+</p>
+
+{%endblock%} {% block script %}
+
+<script type="text/javascript">
+  let id = '{{job.id}}';
+</script>
+
+<script >
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  document.querySelector('.apply_button').onclick = function () {
+      fetch(`/apply/${id}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          body: 'apply',
+        }),
+      });
+      // Disable the button
+      document.querySelector('.apply_button').innerHTML = 'Applied';
+      document.querySelector('.apply_button').disabled = 'true';
+    };
+});
+</script>
+{% endblock %}

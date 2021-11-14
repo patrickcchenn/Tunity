@@ -1,0 +1,98 @@
+{% extends "tunity/layout.html" %} {% load static %} {% block body %}
+<div class="container text-center bodyy">
+  <div class="row">
+    <div class="col-md-8 col-sm-12">
+      <br />
+      <h2>
+        Where
+        <span id="first" class="fade experiment-title">Startups </span>
+        meet their future
+        <span id="second" class="fade experiment-title">employees </span>
+      </h2>
+      <h4>Start grabbing the oppor<i>TUNITY</i> that suits you!</h4>
+      <div class="row">
+        <div class="col-md-6 col-6">
+          Fill your personal information and start applying for jobs!
+        </div>
+        <div class="col-md-6 col-6">
+          Start opening job opportunities and hiring people!
+        </div>
+        <div class="w-100"></div>
+        <button class="btn btn-primary col-md-6 col-6 rounded-pill">
+          <a href="{% url 'personal'%}"> Start a personal account </a>
+        </button>
+        <button class="btn btn-light col-md-6 col-6 rounded-pill">
+          <a href="{% url 'startup'%}"> Start a business account </a>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <img src="{% static 'tunity/handshake.jpg' %}" alt="handshake_photo" />
+    </div>
+  </div>
+</div>
+
+<div class="container text-center second">
+  <div class="row">
+    <div class="col-md-5 col-sm-12">
+      <img
+        src="{% static 'tunity/business_man.jpg' %}"
+        alt="businessman_photo"
+      />
+    </div>
+    <div class="col-md-7 col-sm-12 center">
+      <h2>Get started.</h2>
+      <p class="col-md-6 col-sm-8">
+        Tunity is a job vacancy platform, where you get to find future employees
+        or jobs
+      </p>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block script %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Text to replace elements in h1 with
+    const languages = [['employees', 'startups']];
+
+    // DOM elements to be modified
+    const welcomeTitle = document.getElementById('first');
+    const toTitle = document.getElementById('second');
+
+    // Function to modify the text
+    let languageIndex = 0;
+    const changeHeading = () => {
+      /* Case where the language index has gone out of bounds of the array; reshuffle array and
+               reset text */
+      if (languageIndex === languages.length) {
+        languageIndex = 0;
+
+        welcomeTitle.textContent = 'startups';
+        toTitle.textContent = 'employees';
+      } else {
+        // Iterate through the random language selected, changing each DOM element sequentially
+        const language = languages[languageIndex];
+        welcomeTitle.textContent = language[0];
+        toTitle.textContent = language[1];
+        languageIndex++;
+      }
+    };
+
+    const fadeAnimation = () => {
+      const welcomeTitle = document.getElementById('first');
+      const toTitle = document.getElementById('second');
+
+      welcomeTitle.className = '';
+      toTitle.className = '';
+
+      setTimeout(() => (welcomeTitle.className = 'fade'), 1000);
+      setTimeout(() => (toTitle.className = 'fade'), 1000);
+    };
+
+    setInterval(changeHeading, 2000);
+    setInterval(fadeAnimation, 2000);
+  });
+</script>
+{% endblock %}
