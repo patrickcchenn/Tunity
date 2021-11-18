@@ -7,14 +7,8 @@ In this modern world, as job opportunities diminished due to its competitiveness
 This is when Tunity shines. With tunity, you could search and apply to all of the available jobs that suits you. All you need is
 to register , upload your cv and you are all set to apply for jobs. In addition, companies can register as a company account and start open job vacancies.
 
-### Distinctiveness and Complexity
-
-I believe this project is distinct from the past projects. It is distinct from social network since you do not
-connect with other people and interaction is just between user and companies regarding jobs appliance. Moreover,
-This projects has nothing to do with transactions(buying/selling), therefore it is distinctive from e-commerce(project2).
-
-In terms of complexity, it clearly satisfied the requirements as the project is build with django, models with complex relation are included,
-upload file feature for resume,javascript is utilized, uses AJAX call, and Bootsrap gridsystem is used in all pages to ensure mobile-responsiveness.
+It is build with django, models with complex relation are included,
+upload file feature for resume, Javascript is utilized, uses AJAX call, and Bootsrap gridsystem is used in all pages to ensure mobile-responsiveness.
 
 ### Files & Directories
 
